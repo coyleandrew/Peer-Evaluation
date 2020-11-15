@@ -1,6 +1,6 @@
 FROM ruby:2.6
 RUN apt-get update -qq && apt-get install -y nodejs npm postgresql-client build-essential
-RUN npm install yarn -g
+RUN npm install yarn
 
 # Bootstrap files, will be overwritten by rails new command
 RUN mkdir /app

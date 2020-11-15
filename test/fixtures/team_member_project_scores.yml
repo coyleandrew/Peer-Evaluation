@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  score: 
+  team_member: one
+  project_team: one
+
+two:
+  score: 
+  team_member: two
+  project_team: two
