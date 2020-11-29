@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Welcome To Evalus</h1>
+
+<p>Please complete the following project evaluations.</p>
+<p>Pretending to be josh TODO: Login</p>
+<% @evals.each do |e| %>
+    <p>
+        Team: <%= e.team.name %>
+        Project: <%= e.project.name %>
+        Due: <%= e.project.due %>
+        <% e.team.team_members.each do |m| %>
+            <br/>
+            <%= m.user.email %>
+            <span><b>TODO:</b> Link with project and team member</span>
+            <%= link_to "Evalute", :controller => :evaluations %>
+        <% end %>
+    </p>
+<% end %>

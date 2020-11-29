@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to:   "home#index"
   resources :team_member_project_scores
   resources :team_members
   resources :evaluations

@@ -5,6 +5,13 @@ application up and running.
 
 Things you may want to cover:
 
+Install Rails and such
+> bundle install
+
+Install postgresql dev tools
+> apt update
+> apt install postgresql postgresql-contrib libpq-dev
+
 * Ruby version
 
 * System dependencies

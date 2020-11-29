@@ -11,7 +11,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -\
     && apt-get update \
     && apt-get install -y yarn
 
-# Bootstrap files, will be overwritten by rails new command
+# copy project files
 RUN mkdir /app
 WORKDIR /app
 COPY Gemfile /app/Gemfile
@@ -27,3 +27,5 @@ EXPOSE 3000
 
 # Start the main process.
 CMD ["rails", "server", "-b", "0.0.0.0"]
+
+RUN RAILS_ENV=production bundle exec rake assets:precompile

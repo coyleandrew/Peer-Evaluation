@@ -7,9 +7,8 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: db
+  host: ''
   username: postgres
-  password: password
   pool: 5
 
 development:
@@ -21,8 +20,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: evaldb
+  database: evaldb_test
 
 production:
   <<: *default
-  database: evaldb
+  url: <%= ENV['DATABASE_URL'] %>
