@@ -8,25 +8,23 @@ Things you may want to cover:
 Install Rails and such
 > bundle install
 
-Install postgresql dev tools
+Install postgresql and tools
 > apt update
 > apt install postgresql postgresql-contrib libpq-dev
 
-* Ruby version
+Init the database
+> rake db:setup
 
-* System dependencies
+If db:setup throws errors related to postgresql try the following.
 
-* Configuration
+Force the postgresql server to accpet local connections always
+> vim /etc/postgresql/11/main/pg_hba.conf
 
-* Database creation
+Modify the line after "Database administrative login by Unix domain socket" to look like this
+> local   all             postgres                                trust
 
-* Database initialization
+Restart the service to update the changes
+> service postgresql restart
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# Team-Three-Project-6
+Start rails
+> bundle exec rails s
