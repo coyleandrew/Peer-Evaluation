@@ -1,9 +1,6 @@
-# README
+# Team-Three Project-Six
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+## Standard VM setup
 
 Install Rails and such
 > bundle install
@@ -28,3 +25,13 @@ Restart the service to update the changes
 
 Start rails
 > bundle exec rails s
+
+## Docker Setup
+Build the image
+> docker-compose build
+
+Init the database
+> docker-compose run web rake db:setup
+
+Start the containers
+> docker-compose up

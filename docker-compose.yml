@@ -9,9 +9,12 @@ services:
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    #Uncomment for heroku deploy
     environment:
-      RAILS_ENV: production
-      RAILS_MASTER_KEY: a3c511fcf363f5de92e5e97d0c825bb6ae22887756e191b30c9fae1365c658d129788bf0c234cf0e6efdd950f6a563c0e8c21f165e2fffa5586b5e38b4d0dac8
+      DATABASE_HOST: 'db'
+      DATABASE_PASSWORD: 'password'
+      #RAILS_ENV: production
+      #RAILS_MASTER_KEY: a3c511fcf363f5de92e5e97d0c825bb6ae22887756e191b30c9fae1365c658d129788bf0c234cf0e6efdd950f6a563c0e8c21f165e2fffa5586b5e38b4d0dac8
     volumes:
       - .:/app
     ports:
