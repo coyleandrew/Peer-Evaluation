@@ -4,7 +4,11 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    if params[:course_id]
+      @projects = Project.where course_id: params[:course_id]
+    else
+      @projects = Project.all
+    end
   end
 
   # GET /projects/1

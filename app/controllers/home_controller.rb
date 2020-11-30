@@ -1,9 +1,14 @@
-class HomeController < ActionController::Base
+class HomeController < ApplicationController
 
     def index
-        @evals = ProjectTeam.includes(:team, :project, :team_member_project_scores)
-            .joins(team: [{ team_members: :user }])
-            .where(users: {id: 1})
+        #Show the current users dashboard
+        if helpers.current_user
+            @evals = ProjectTeam.includes(:team, :project, :team_member_project_scores)
+                .joins(team: [{ team_members: :user }])
+                .where(users: {id: helpers.current_user.id})
+        else
+            @evals = []
+        end
     end
 
     private

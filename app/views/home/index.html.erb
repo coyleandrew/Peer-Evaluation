@@ -2,21 +2,24 @@
 
 <h1>Welcome To Evaluations</h1>
 
-<p>Please complete the following project evaluations.</p>
-<p>Pretending to be josh TODO: Login</p>
-<% @evals.each do |e| %>
-    <p>
-        Team: <%= e.team.name %>
-        Project: <%= e.project.name %>
-        Due: <%= e.project.due %>
-        <% e.team.team_members.each do |m| %>
-            <br/>
-            <%= m.user.email %>
-            <% if (eval = e.evaluations.find { |e2| e2.team_member.user.email == m.user.email } ) %>
-                Score: <%= eval.score %>
-            <% else %>
-                <%= link_to "Evalute", :controller => :evaluations, action: :new, projectId: e.project_id, teamMemberId: m.id %>
+<% if current_user %>
+    <p>Please complete the following project evaluations.</p>
+    <% @evals.each do |e| %>
+        <p>
+            Team: <%= e.team.name %>
+            Project: <%= e.project.name %>
+            Due: <%= e.project.due %>
+            <% e.team.team_members.each do |m| %>
+                <br/>
+                <%= m.user.email %>
+                <% if (eval = e.evaluations.find { |e2| e2.team_member.user.email == m.user.email } ) %>
+                    Score: <%= eval.score %>
+                <% else %>
+                    <%= link_to "Evalute", :controller => :evaluations, action: :new, projectId: e.project_id, teamMemberId: m.id %>
+                <% end %>
             <% end %>
-        <% end %>
-    </p>
+        </p>
+    <% end %>
+<% else %>
+    <p>Please login to begin.</p>
 <% end %>

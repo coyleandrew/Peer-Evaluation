@@ -4,7 +4,11 @@ class CourseRostersController < ApplicationController
   # GET /course_rosters
   # GET /course_rosters.json
   def index
-    @course_rosters = CourseRoster.all
+    if params[:course_id]
+      @course_rosters = CourseRoster.where course_id: params[:course_id]
+    else
+      @course_rosters = CourseRoster.all
+    end
   end
 
   # GET /course_rosters/1
@@ -15,6 +19,7 @@ class CourseRostersController < ApplicationController
   # GET /course_rosters/new
   def new
     @course_roster = CourseRoster.new
+    @course_roster.course_id = params[:course_id]
   end
 
   # GET /course_rosters/1/edit

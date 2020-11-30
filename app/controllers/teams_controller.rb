@@ -4,7 +4,12 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
+    if params[:course_id]
+      puts "Get teams for course #{params[:course_id]}"
+      @teams = Team.where course_id: params[:course_id]
+    else
+      @teams = Team.all
+    end
   end
 
   # GET /teams/1

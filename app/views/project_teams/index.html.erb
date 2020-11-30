@@ -18,8 +18,8 @@
         <td><%= project_team.score %></td>
         <td><%= project_team.team_id %></td>
         <td><%= project_team.project_id %></td>
-        <td><%= link_to 'Show', project_team %></td>
-        <td><%= link_to 'Edit', edit_project_team_path(project_team) %></td>
+        <td><%= link_to 'Show', course_project_project_team %></td>
+        <td><%= link_to 'Edit', edit_course_project_project_team_path(project_team) %></td>
         <td><%= link_to 'Destroy', project_team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Project Team', new_project_team_path %>
+<%= link_to 'New Project Team', new_course_project_project_team_path %>

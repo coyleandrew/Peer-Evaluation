@@ -4,7 +4,13 @@ class TeamMembersController < ApplicationController
   # GET /team_members
   # GET /team_members.json
   def index
-    @team_members = TeamMember.all
+    if params[:team_id]
+      puts "get team members by team id #{params[:team_id]}"
+      @team_members = TeamMember.where team_id: params[:team_id]
+    else
+      puts "get all team members"
+      @team_members = TeamMember.all
+    end
   end
 
   # GET /team_members/1
@@ -15,6 +21,9 @@ class TeamMembersController < ApplicationController
   # GET /team_members/new
   def new
     @team_member = TeamMember.new
+    if params[:team_id]
+      @team_member.team_id = params[:team_id]
+    end
   end
 
   # GET /team_members/1/edit

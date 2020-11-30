@@ -15,7 +15,7 @@
     <% @team_members.each do |team_member| %>
       <tr>
         <td><%= team_member.team_id %></td>
-        <td><%= team_member.course_roster_id %></td>
+        <td><%= team_member.course_roster.user.email %></td>
         <td><%= link_to 'Show', team_member %></td>
         <td><%= link_to 'Edit', edit_team_member_path(team_member) %></td>
         <td><%= link_to 'Destroy', team_member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Team Member', new_team_member_path %>
+<%= link_to 'Add Team Member', new_course_team_team_member_path %>

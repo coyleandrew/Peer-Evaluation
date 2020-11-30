@@ -16,9 +16,9 @@
       <tr>
         <td><%= course_roster.course.name %></td>
         <td><%= course_roster.user.email %></td>
-        <td><%= link_to 'Show', course_roster %></td>
-        <td><%= link_to 'Edit', edit_course_roster_path(course_roster) %></td>
-        <td><%= link_to 'Destroy', course_roster, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', course_course_roster_path(id: course_roster.id) %></td>
+        <td><%= link_to 'Edit', edit_course_course_roster_path(id: course_roster.id) %></td>
+        <td><%= link_to 'Destroy', course_course_roster_path(id: course_roster.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Course Roster', new_course_roster_path %>
+<%= link_to 'New Course Roster', new_course_course_roster_path %>
