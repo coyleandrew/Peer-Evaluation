@@ -12,8 +12,11 @@
         <% e.team.team_members.each do |m| %>
             <br/>
             <%= m.user.email %>
-            <span><b>TODO:</b> Link with project and team member</span>
-            <%= link_to "Evalute", :controller => :evaluations %>
+            <% if (eval = e.evaluations.find { |e2| e2.team_member.user.email == m.user.email } ) %>
+                Score: <%= eval.score %>
+            <% else %>
+                <%= link_to "Evalute", :controller => :evaluations, action: :new, projectId: e.project_id, teamMemberId: m.id %>
+            <% end %>
         <% end %>
     </p>
 <% end %>

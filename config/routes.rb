@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :team_member_project_scores
   resources :team_members
   resources :evaluations
+  get 'evaluations/new/:projectId/:teamMemberId' => 'evaluations#new'
   resources :project_teams
   resources :faculties
   resources :course_rosters
