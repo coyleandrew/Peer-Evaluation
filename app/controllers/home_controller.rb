@@ -3,7 +3,7 @@ class HomeController < ActionController::Base
     def index
         @evals = ProjectTeam.includes(:team, :project, :team_member_project_scores)
             .joins(team: [{ team_members: :user }])
-            .where(users: {id: 4})
+            .where(users: {id: 1})
     end
 
     private
