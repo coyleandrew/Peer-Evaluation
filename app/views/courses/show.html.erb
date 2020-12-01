@@ -14,6 +14,12 @@
   <tbody>
     <tr>
       <td>Course Average:</td>
+      <% sum = 0 %>
+      <% roster = CourseRoster.where(course_id: @course.id) %>
+      <% roster.each do |roster_entry| %>
+        <% scores = TeamMemberProjectScore.where(user_id: roster_entry.user_id) %>
+        <%  %>
+      <% end %>
       <td></td>
     </tr>
     <tr>

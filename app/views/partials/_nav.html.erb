@@ -1,7 +1,7 @@
 <ul>
   <% Course.all.each do |course| %>
     <li><%= link_to course.name, course_path(id: course.id) %></li>
-      <%= if course.id = params[:course_id] %>
+      <% if course.id = params[:course_id] %>
         <ul>
           <li><%= link_to Evaluations %></li>
           <li>..</li>
@@ -9,4 +9,4 @@
         </ul>
       <% end %>
   <% end %>
-<ul>
+</ul>
