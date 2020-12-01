@@ -4,7 +4,12 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all
+    # Admin's can see all
+    if helpers.current_user.admin
+      @courses = Course.all
+    else
+      @courses = Course.joins(:faculties).where faculties: {user_id: helpers.current_user.id}
+    end
   end
 
   # GET /courses/1

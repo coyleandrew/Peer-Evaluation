@@ -12,18 +12,12 @@
 
 <p>
   <strong>Project:</strong>
-  <%= @evaluation.project_id %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @evaluation.user_id %>
+  <%= @evaluation.project.name %>
 </p>
 
 <p>
   <strong>Team member:</strong>
-  <%= @evaluation.team_member_id %>
+  <%= @evaluation.team_member.user.email %>
 </p>
 
-<%= link_to 'Edit', edit_evaluation_path(@evaluation) %> |
 <%= link_to 'Back', root_path %>

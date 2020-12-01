@@ -6,6 +6,8 @@ class HomeController < ApplicationController
             @evals = ProjectTeam.includes(:team, :project, :team_member_project_scores)
                 .joins(team: [{ team_members: :user }])
                 .where(users: {id: helpers.current_user.id})
+            @teamMemberships = TeamMember.joins(:course_roster).where course_rosters: {user_id: helpers.current_user.id}
+            @projectTeams = ProjectTeam.joins(team: { team_members: :user}).where users: {id: helpers.current_user.id}
         else
             @evals = []
         end

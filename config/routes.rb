@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
   root to:   "home#index"
   resources :team_member_project_scores
-  resources :evaluations
+  resources :evaluations, only: [:show]
   get 'evaluations/new/:projectId/:teamMemberId' => 'evaluations#new'
+  post 'evaluations/new/:projectId/:teamMemberId', to: 'evaluations#create', as: 'submit_evaluation'
   resources :login, only: [:new, :create, :destroy]
   get 'login', to: 'login#new'
   get 'logout', to: 'login#destroy'
   resources :faculties
-  resources :teams
   resources :team_members
   resources :projects
   resources :course_rosters
