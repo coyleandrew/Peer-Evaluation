@@ -10,11 +10,16 @@ Rails.application.routes.draw do
   resources :faculties
   resources :course_rosters
   resources :courses do
+    resources :evaluations
     resources :teams do
       resources :team_members
+      resources :evaluations
     end
     resources :projects do
-      resources :project_teams
+      resources :project_teams do
+        resources :evaluations
+      end
+      resources :evaluations
     end
     resources :course_rosters
   end

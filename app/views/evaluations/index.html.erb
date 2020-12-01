@@ -8,6 +8,7 @@
       <th>Score</th>
       <th>Comment</th>
       <th>Project</th>
+      <th>Team</th>
       <th>User</th>
       <th>Team member</th>
       <th colspan="3"></th>
@@ -20,11 +21,9 @@
         <td><%= evaluation.score %></td>
         <td><%= evaluation.comment %></td>
         <td><%= evaluation.project.name %></td>
+        <td><%= evaluation.team.name %></td>
         <td><%= evaluation.user.email %></td>
         <td><%= evaluation.team_member.user.email %></td>
-        <td><%= link_to 'Show', evaluation %></td>
-        <td><%= link_to 'Edit', edit_evaluation_path(evaluation) %></td>
-        <td><%= link_to 'Destroy', evaluation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +31,4 @@
 
 <br>
 
-<%= link_to 'New Evaluation', new_evaluation_path %>
+<%= link_to 'Back', course_path(id: params[:course_id]) %>

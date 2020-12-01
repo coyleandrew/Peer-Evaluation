@@ -4,7 +4,18 @@ class EvaluationsController < ApplicationController
   # GET /evaluations
   # GET /evaluations.json
   def index
-    @evaluations = Evaluation.all
+    if params[:project_team_id] && params[:project_id]
+      @evaluations = Evaluation.joins(:project, team: :project_teams)
+        .where project_teams: { id: params[:project_team_id] }, projects: { id: params[:project_id] }
+    elsif params[:team_id]
+      @evaluations = Evaluation.joins(:team).where teams: { id: params[:team_id] }
+    elsif params[:project_id]
+      @evaluations = Evaluation.joins(:project).where projects: { id: params[:project_id] }
+    elsif params[:course_id]
+      @evaluations = Evaluation.joins(:project).where(projects: { course_id: params[:course_id] })
+    else
+      @evaluations = Evaluation.all
+    end
   end
 
   # GET /evaluations/1

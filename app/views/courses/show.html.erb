@@ -6,6 +6,7 @@
 </p>
 
 <ul>
+  <li><%= link_to 'Evaluations', course_evaluations_path(course_id: params[:id]) %></li>
   <li><%= link_to 'Projects', course_projects_path(course_id: params[:id]) %></li>
   <li><%= link_to 'Teams', course_teams_path(course_id: params[:id]) %></li>
   <li><%= link_to 'Roster', course_course_rosters_path(course_id: params[:id]) %></li>
@@ -27,6 +28,7 @@
         <td><%= team.name %></td>
         <td>
           <%= link_to 'Edit', course_team_path(course_id: team.course_id, id: team.id) %>
+          <%= link_to 'Evaluations', course_team_evaluations_path(course_id: team.course_id, team_id: team.id) %>
         </td>
       </tr>
       <tr>
@@ -49,7 +51,7 @@
     <tr>
       <th>Name</th>
       <th>Due</th>
-      <th></th>
+      <th colapsn="2"></th>
     </tr>
   </thead>
 
@@ -59,12 +61,13 @@
         <td><%= project.name %></td>
         <td><%= project.due %></td>
         <td><%= link_to 'Edit', course_project_path(course_id: @course.id, id: project.id) %></td>
+        <td><%= link_to 'Evaluations', course_project_evaluations_path(course_id: @course.id, project_id: project.id) %></td>
       </tr>
       <tr>
         <td colspan="3">
           <ul>
             <% project.project_teams.each do |pt| %>
-              <li><%= pt.team.name %></li>
+              <li><%= pt.team.name %> | <%= link_to 'Evaluations', course_project_project_team_evaluations_path(course_id: @course.id, project_id: project.id, project_team_id: pt.id ) %></li>
             <% end %>
           </ul>
         </td>

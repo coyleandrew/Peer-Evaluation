@@ -3,4 +3,5 @@ class Course < ApplicationRecord
     has_many :teams
     has_many :faculties
     has_many :course_rosters
+    validates :name, :presence => true
 end
