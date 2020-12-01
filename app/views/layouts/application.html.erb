@@ -11,17 +11,21 @@
 
   
   <body>
-    <% if current_user %>
-      Logged in as <%= current_user.email %>.
-      <%= link_to "Log Out", logout_path %>
-    <% else %>
-      <%= link_to "Log In", login_index_path %>
+  <% if current_user %>
+    Logged in as <%= current_user.email %>.
+    <%= link_to "Log Out", logout_path %>
+  <% else %>
+    <%= link_to "Log In", login_index_path %>
+  <% end %>
+  <% if current_user %>
+    <% if current_user.admin %>
+      <%= render "partials/nav"%>
     <% end %>
 
-    <% if current_course %>
-      <h1><%= current_course.name %></h1>
-    <% end %>
-
+  <% if current_course %>
+    <h1><%= current_course.name %></h1>
+  <% end %>
+  <% end %>
     <%= yield %>
   </body>
 </html>

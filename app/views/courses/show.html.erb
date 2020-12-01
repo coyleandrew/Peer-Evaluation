@@ -5,6 +5,32 @@
   <%= @course.name %>
 </p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Averages</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Course Average:</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Evaluation Average:</td>
+      <td>
+        <% sum = 0 %>
+        <% evaluations = Evaluation.joins(:project).where(projects: { course_id: @course.id }) %>
+        <% evaluations.each do |eval| %>
+          <% sum = sum + eval.score %>
+        <% end %>
+        <% average = sum.to_f / evaluations.length.to_f %>
+        <%= average.round(2) %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <ul>
   <li><%= link_to 'Evaluations', course_evaluations_path(course_id: params[:id]) %></li>
   <li><%= link_to 'Projects', course_projects_path(course_id: params[:id]) %></li>

@@ -76,4 +76,9 @@ class CourseRostersController < ApplicationController
     def course_roster_params
       params.require(:course_roster).permit(:course_id, :user_id)
     end
+
+    def course_roster_import_params
+      # params.require(:import).permit(:email)
+      params.require(:email)
+    end
 end
