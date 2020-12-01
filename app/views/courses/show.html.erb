@@ -93,7 +93,11 @@
         <td colspan="3">
           <ul>
             <% project.project_teams.each do |pt| %>
-              <li><%= pt.team.name %> | <%= link_to 'Evaluations', course_project_project_team_evaluations_path(course_id: @course.id, project_id: project.id, project_team_id: pt.id ) %></li>
+              <li>
+                <%= pt.team.name %> | 
+                <%= link_to "Evaluations (#{pt.evaluations.length})", course_project_project_team_evaluations_path(course_id: @course.id, project_id: project.id, project_team_id: pt.id ) %> |
+                <%= link_to "Scores (#{pt.team_member_project_scores.length})", course_project_project_team_team_member_project_scores_path(course_id: @course.id, project_id: project.id, project_team_id: pt.id ) %>
+                </li>
             <% end %>
           </ul>
         </td>

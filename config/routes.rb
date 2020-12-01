@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :projects do
       resources :project_teams do
         resources :evaluations
+        resources :team_member_project_scores, :path => "scores"
       end
       resources :evaluations
     end
