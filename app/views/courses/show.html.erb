@@ -9,7 +9,20 @@
   <tbody>
     <tr>
       <td>Course Average:</td>
-      <td></td>
+      <td>
+      <% sum = 0 %>
+      <% count = 0 %>
+      <% roster = CourseRoster.where(course_id: @course.id) %>
+      <% roster.each do |roster_entry| %>
+        <% scores = TeamMemberProjectScore.where(team_member_id: roster_entry.user_id) %>
+        <% scores.each do |score| %>
+          <% sum = sum + score.score %>
+          <% count += 1 %>
+        <% end %>
+      <% end %>
+      <% average = sum.to_f / count.to_f %>
+      <%= average %>
+      </td>
     </tr>
     <tr>
       <td>Evaluation Average:</td>
