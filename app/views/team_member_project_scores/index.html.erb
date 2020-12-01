@@ -1,31 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Team Member Project Scores</h1>
+<h2><%= @team.name %> <%= @project.name %> Scores</h2>
 
 <table>
   <thead>
     <tr>
-      <th>Score</th>
       <th>Team member</th>
-      <th>Project team</th>
-      <th colspan="3"></th>
+      <th>Score</th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @team_member_project_scores.each do |team_member_project_score| %>
       <tr>
+        <td><%= team_member_project_score.team_member.user.email %></td>
         <td><%= team_member_project_score.score %></td>
-        <td><%= team_member_project_score.team_member_id %></td>
-        <td><%= team_member_project_score.project_team_id %></td>
-        <td><%= link_to 'Show', team_member_project_score %></td>
-        <td><%= link_to 'Edit', edit_team_member_project_score_path(team_member_project_score) %></td>
-        <td><%= link_to 'Destroy', team_member_project_score, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_course_project_project_team_team_member_project_score_path(course_id: params[:course_id], project_id: params[:project_id], project_team_id: params[:project_team_id], id: team_member_project_score.id) %></td>
       </tr>
+    <% end %>
+    <% @team_members.each do |tm| %>
+      <tr>
+        <td><%= tm.user.email %></td>
+        <td><%= link_to 'Score', new_course_project_project_team_team_member_project_score_path(course_id: params[:course_id], project_id: params[:project_id], project_team_id: params[:project_team_id], team_member_id: tm.id) %></td></td>
+        <td></td>
+      </tr>
+      <%= tm.user.email %>
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Team Member Project Score', new_team_member_project_score_path %>
+<%= link_to 'Back', course_path(id: params[:course_id]) %>

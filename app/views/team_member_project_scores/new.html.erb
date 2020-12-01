@@ -1,5 +1,7 @@
-<h1>New Team Member Project Score</h1>
+<h2><%= @team.name %> <%= @project.name %> Scores</h2>
 
-<%= render 'form', team_member_project_score: @team_member_project_score %>
+<h3><%= @member.user.email %> </h3>
 
-<%= link_to 'Back', team_member_project_scores_path %>
+<%= render 'form', {team_member_project_score: @team_member_project_score, path: course_project_project_team_team_member_project_scores_path(course_id: params[:course_id], project_id: params[:project_id], project_team_id: params[:project_team_id]) } %>
+
+<%= link_to 'Back', course_project_project_team_team_member_project_scores_path(course_id: params[:course_id], project_id: params[:project_id], project_team_id: params[:project_team_id]) %>
