@@ -3,38 +3,49 @@
 <h1>Welcome To Evaluations</h1>
 
 <% if current_user %>
-    <h2>Teams</h2>
-    <ul>
-        <% @teamMemberships.each do |tm| %>
-            <li><%= tm.team.name %></li>
-        <% end %>
-    </ul>
-
-    <h2>Projects</h2>
-    <ul>
-        <% @projectTeams.each do |pt| %>
-            <li><%= pt.project.name %></li>
-        <% end %>
-    </ul>
-    
-    <h2>Evaluations</h2>
-    <p>Please complete the following project evaluations.</p>
-    <% @evals.each do |e| %>
-        <p>
-            Team: <%= e.team.name %>
-            Project: <%= e.project.name %>
-            Due: <%= e.project.due %>
-            <% e.team.team_members.each do |m| %>
-                <br/>
-                <%= m.user.email %>
-                <% if (eval = e.evaluations.find { |e2| e2.team_member.user.email == m.user.email } ) %>
-                    Score: <%= eval.score %>
-                <% else %>
-                    <%= link_to "Evalute", :controller => :evaluations, action: :new, projectId: e.project_id, teamMemberId: m.id %>
+    <div class="w3-row-padding">
+        <div class="w3-half">
+            <h2>Teams</h2>
+            <ul>
+                <% @teamMemberships.each do |tm| %>
+                    <li><%= tm.team.name %></li>
                 <% end %>
-            <% end %>
-        </p>
-    <% end %>
+            </ul>
+        </div>
+        <div class="w3-half">
+            <h2>Projects</h2>
+            <ul>
+                <% @projectTeams.each do |pt| %>
+                    <li><%= pt.project.name %></li>
+                <% end %>
+            </ul>
+        </div>
+    </div>
+
+    <div class="w3-row-padding">
+        <h2>Evaluations</h2>
+        <p>Please complete the following project evaluations.</p>
+
+        <% @evals.each do |e| %>
+            <ul class="w3-ul w3-light-grey w3-center">
+                <li class="w3-dark-grey w3-xlarge w3-padding-32"><%= e.team.name %></li>
+                <li class="w3-padding-16">Project: <%= e.project.name %></li>
+                <li class="w3-padding-16">Due: <%= e.project.due %></li>
+                <% e.team.team_members.each do |m| %>
+                    <li class="w3-padding-16">
+                        <%= m.user.email %>
+                        <% if (eval = e.evaluations.find { |e2| e2.team_member.user.email == m.user.email } ) %>
+                            Score: <%= eval.score %>
+                        <% else %>
+                            <%= link_to "Evalute", :controller => :evaluations, action: :new, projectId: e.project_id, teamMemberId: m.id %>
+                        <% end %>
+                    </li>
+                <% end %>
+            </ul>
+        <% end %>
+        
+    </div>
+    
 <% else %>
     <p>Please login to begin.</p>
 <% end %>
