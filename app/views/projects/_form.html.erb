@@ -1,4 +1,4 @@
-<%= form_with(model: project, local: true) do |form| %>
+<%= form_with(model: project, local: true, url: path) do |form| %>
   <% if project.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -21,10 +21,14 @@
     <%= form.datetime_select :due %>
   </div>
 
-  <div class="field">
-    <%= form.label :course_id %>
-    <%= form.text_field :course_id %>
-  </div>
+  <% if project.course_id %>
+    <%= form.hidden_field :course_id %>
+  <% else %>
+    <div class="field">
+      <%= form.label :course_id %>
+      <%= form.text_field :course_id %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

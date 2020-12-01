@@ -8,8 +8,6 @@ Rails.application.routes.draw do
   get 'login', to: 'login#new'
   get 'logout', to: 'login#destroy'
   resources :faculties
-  resources :team_members
-  resources :projects
   resources :course_rosters
   resources :courses do
     resources :teams do

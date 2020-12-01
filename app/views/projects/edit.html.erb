@@ -1,6 +1,6 @@
-<h1>Editing Project</h1>
+<h2>Edit Project</h2>
 
-<%= render 'form', project: @project %>
+<%= render 'form', {project: @project, path: course_project_path(course_id: @project.course_id, id: @project.id) } %>
 
-<%= link_to 'Show', @project %> |
-<%= link_to 'Back', projects_path %>
+<%= link_to 'Back', course_path(id: @project.course_id) %>
+
