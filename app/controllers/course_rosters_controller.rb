@@ -66,6 +66,10 @@ class CourseRostersController < ApplicationController
     end
   end
 
+  def import
+    
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course_roster
@@ -75,5 +79,10 @@ class CourseRostersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def course_roster_params
       params.require(:course_roster).permit(:course_id, :user_id)
+    end
+
+    def course_roster_import_params
+      # params.require(:import).permit(:email)
+      params.require(:email)
     end
 end

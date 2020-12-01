@@ -35,4 +35,5 @@
   </tbody>
 </table>
 
-<%= link_to 'Back', course_path(id: @project.course_id) %>
+<%= link_to 'Back to course', course_path(id: @project.course_id) %> |
+<%= link_to 'Back to projects', course_projects_path(course_id: @project.course_id) %>

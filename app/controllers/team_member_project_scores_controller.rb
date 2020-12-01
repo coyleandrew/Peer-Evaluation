@@ -4,7 +4,19 @@ class TeamMemberProjectScoresController < ApplicationController
   # GET /team_member_project_scores
   # GET /team_member_project_scores.json
   def index
-    @team_member_project_scores = TeamMemberProjectScore.all
+    if params[:project_team_id]
+      @team_member_project_scores = TeamMemberProjectScore.where project_team_id: params[:project_team_id]
+      @project = Project.find params[:project_id]
+      @team = ProjectTeam.find(params[:project_team_id]).team
+
+      # show links to create the scores not yet created by project team member
+      @team_members = TeamMember
+        .joins(team: :project_teams)
+        .where(project_teams: { id: params[:project_team_id] })
+        .reject { |tm| @team_member_project_scores.any? { |tms| tm.id == tms.team_member_id } }
+    else
+      @team_member_project_scores = TeamMemberProjectScore.all
+    end
   end
 
   # GET /team_member_project_scores/1
@@ -15,22 +27,36 @@ class TeamMemberProjectScoresController < ApplicationController
   # GET /team_member_project_scores/new
   def new
     @team_member_project_score = TeamMemberProjectScore.new
+    @team_member_project_score.project_team_id = params[:project_team_id] 
+    @team_member_project_score.team_member_id = params[:team_member_id] 
+
+    @project = Project.find params[:project_id]
+    @team = ProjectTeam.find(params[:project_team_id]).team
+    @member = TeamMember.find params[:team_member_id] 
   end
 
   # GET /team_member_project_scores/1/edit
   def edit
+    @project = Project.find params[:project_id]
+    @team = ProjectTeam.find(params[:project_team_id]).team
+    @member = TeamMember.find params[:id] 
   end
 
   # POST /team_member_project_scores
   # POST /team_member_project_scores.json
   def create
     @team_member_project_score = TeamMemberProjectScore.new(team_member_project_score_params)
+    @team_member_project_score.project_team_id = params[:project_team_id]
 
     respond_to do |format|
       if @team_member_project_score.save
-        format.html { redirect_to @team_member_project_score, notice: 'Team member project score was successfully created.' }
+        format.html { redirect_to course_project_project_team_team_member_project_scores_path(course_id: params[:course_id], project_id: params[:project_id], project_team_id: params[:project_team_id]), notice: 'Team member scored.' }
         format.json { render :show, status: :created, location: @team_member_project_score }
       else
+        @project = Project.find params[:project_id]
+        @team = ProjectTeam.find(params[:project_team_id]).team
+        @member = ProjectMember.find team_member_project_score.team_member_id
+
         format.html { render :new }
         format.json { render json: @team_member_project_score.errors, status: :unprocessable_entity }
       end
@@ -42,9 +68,13 @@ class TeamMemberProjectScoresController < ApplicationController
   def update
     respond_to do |format|
       if @team_member_project_score.update(team_member_project_score_params)
-        format.html { redirect_to @team_member_project_score, notice: 'Team member project score was successfully updated.' }
+        format.html { redirect_to course_project_project_team_team_member_project_scores_path(course_id: params[:course_id], project_id: params[:project_id], project_team_id: params[:project_team_id]), notice: 'Team member was successfully updated.' }
         format.json { render :show, status: :ok, location: @team_member_project_score }
       else
+        @project = Project.find params[:project_id]
+        @team = ProjectTeam.find(params[:project_team_id]).team
+        @member = ProjectMember.find params[team_member_project_score.team_member_id]
+
         format.html { render :edit }
         format.json { render json: @team_member_project_score.errors, status: :unprocessable_entity }
       end

@@ -2,4 +2,4 @@
 
 <%= render 'form', course_roster: @course_roster %>
 
-<%= link_to 'Back', course_rosters_path %>
+<%= link_to 'Back', course_path(id: @course_roster.course_id) %>

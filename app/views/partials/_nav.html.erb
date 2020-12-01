@@ -1,37 +1,12 @@
-<style>
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 12px 16px;
-  z-index: 1;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-</style>
-
-<div class="dropdown">
-  <% Course.all.each do |course| %>
-    <button class="dropbtn">
-    <%= link_to course.name, course_path(id: course.id) %>
-    </button>
-    <% if course.id == params[:course_id] %>
-      <div class="dropdown-content">
-        <%= link_to "Evaluations" %>
-        <%= link_to "Projects" %>
-        <%= link_to "Rosters" %>
-        <%= link_to "Teams" %>
-      </div>
-    <% end %>
+<% Course.all.each do |course| %>
+  <%= link_to course.name, course_path(id: course.id), class: "w3-bar-item w3-button w3-hover-white" %>
+  <% if current_course && course.id == current_course.id %>
+    <ul>
+      <li><%= link_to 'Evaluations', course_evaluations_path(course_id: current_course.id), class: "w3-bar-item w3-button w3-hover-white" %></li>
+      <li><%= link_to 'Projects', course_projects_path(course_id: current_course.id), class: "w3-bar-item w3-button w3-hover-white" %></li>
+      <li><%= link_to 'Teams', course_teams_path(course_id: current_course.id), class: "w3-bar-item w3-button w3-hover-white" %></li>
+      <li><%= link_to 'Roster', course_course_rosters_path(course_id: current_course.id), class: "w3-bar-item w3-button w3-hover-white" %></li>
+    </ul>
   <% end %>
-</div> 
+<% end %>
 

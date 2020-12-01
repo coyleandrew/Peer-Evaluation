@@ -22,6 +22,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+    @project.course_id = params[:course_id]
   end
 
   # GET /projects/1/edit
@@ -32,10 +33,11 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
+    @project.course_id = params[:course_id]
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.html { redirect_to course_projects_path(course_id: @project.course_id), notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new }
@@ -63,7 +65,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+      format.html { redirect_to course_projects_path(course_id: params[:course_id]), notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

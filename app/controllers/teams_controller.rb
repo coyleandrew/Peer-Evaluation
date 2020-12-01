@@ -23,6 +23,7 @@ class TeamsController < ApplicationController
   # GET /teams/new
   def new
     @team = Team.new
+    @team.course_id = params[:course_id]
   end
 
   # GET /teams/1/edit
@@ -33,10 +34,11 @@ class TeamsController < ApplicationController
   # POST /teams.json
   def create
     @team = Team.new(team_params)
+    @team.course_id = params[:course_id]
 
     respond_to do |format|
       if @team.save
-        format.html { redirect_to @team, notice: 'Team was successfully created.' }
+        format.html { redirect_to course_teams_path(course_id: @team.course_id), notice: 'Team was successfully created.' }
         format.json { render :show, status: :created, location: @team }
       else
         format.html { render :new }
@@ -64,7 +66,7 @@ class TeamsController < ApplicationController
   def destroy
     @team.destroy
     respond_to do |format|
-      format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
+      format.html { redirect_to course_teams_path(course_id: @team.course_id), notice: 'Team was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
