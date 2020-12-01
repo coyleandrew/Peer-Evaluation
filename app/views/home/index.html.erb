@@ -27,21 +27,24 @@
         <p>Please complete the following project evaluations.</p>
 
         <% @evals.each do |e| %>
-            <ul class="w3-ul w3-light-grey w3-center">
-                <li class="w3-dark-grey w3-xlarge w3-padding-32"><%= e.team.name %></li>
-                <li class="w3-padding-16">Project: <%= e.project.name %></li>
-                <li class="w3-padding-16">Due: <%= e.project.due %></li>
-                <% e.team.team_members.each do |m| %>
-                    <li class="w3-padding-16">
-                        <%= m.user.email %>
-                        <% if (eval = e.evaluations.find { |e2| e2.team_member.user.email == m.user.email } ) %>
-                            Score: <%= eval.score %>
-                        <% else %>
-                            <%= link_to "Evalute", :controller => :evaluations, action: :new, projectId: e.project_id, teamMemberId: m.id %>
-                        <% end %>
+            <div style="margin-top:75px">
+                <ul class="w3-ul w3-light-grey">
+                    <li class="w3-dark-grey w3-xlarge w3-padding-32">
+                        <%= e.team.name %> : <%= e.project.name %>
+                        <span style="float:right">Due: <%= e.project.due %></span>
                     </li>
-                <% end %>
-            </ul>
+                    <% e.team.team_members.each do |m| %>
+                        <li class="w3-padding-16">
+                            <%= m.user.email %>
+                            <% if (eval = e.evaluations.find { |e2| e2.team_member.user.email == m.user.email } ) %>
+                                Score: <%= eval.score %>
+                            <% else %>
+                                <%= link_to "Evalute", :controller => :evaluations, action: :new, projectId: e.project_id, teamMemberId: m.id %>
+                            <% end %>
+                        </li>
+                    <% end %>
+                </ul>
+            </div>
         <% end %>
         
     </div>
