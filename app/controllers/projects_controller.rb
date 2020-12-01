@@ -14,6 +14,9 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @teams = Team
+      .where(course_id: @project.course_id)
+      .reject { |t| @project.project_teams.any? { |pt| pt.team_id == t.id } }
   end
 
   # GET /projects/new
@@ -46,7 +49,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+        format.html { redirect_to course_project_path(course_id: @project.course_id, id: @project.id), notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit }

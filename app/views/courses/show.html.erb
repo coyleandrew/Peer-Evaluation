@@ -52,7 +52,7 @@
       <tr>
         <td><%= team.name %></td>
         <td>
-          <%= link_to 'Edit', edit_course_team_path(course_id: team.course_id, id: team.id) %>
+          <%= link_to 'Edit', course_team_path(course_id: team.course_id, id: team.id) %>
         </td>
       </tr>
       <tr>
@@ -84,7 +84,7 @@
       <tr>
         <td><%= project.name %></td>
         <td><%= project.due %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
+        <td><%= link_to 'Edit', course_project_path(course_id: @course.id, id: project.id) %></td>
       </tr>
       <tr>
         <td colspan="3">

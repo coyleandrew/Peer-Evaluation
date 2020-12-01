@@ -34,13 +34,14 @@ class TeamMembersController < ApplicationController
   # POST /team_members.json
   def create
     @team_member = TeamMember.new(team_member_params)
+    @team_member.team_id = params[:team_id]
 
     respond_to do |format|
       if @team_member.save
-        format.html { redirect_to @team_member, notice: 'Team member was successfully created.' }
+        format.html { redirect_to course_team_path(course_id: params[:course_id], id: params[:team_id]), notice: 'Team member was successfully added.' }
         format.json { render :show, status: :created, location: @team_member }
       else
-        format.html { render :new }
+        format.html { redirect_to course_team_path(course_id: params[:course_id], id: params[:team_id]), notice: 'Team member could not be added.' }
         format.json { render json: @team_member.errors, status: :unprocessable_entity }
       end
     end
@@ -51,7 +52,7 @@ class TeamMembersController < ApplicationController
   def update
     respond_to do |format|
       if @team_member.update(team_member_params)
-        format.html { redirect_to @team_member, notice: 'Team member was successfully updated.' }
+        format.html { redirect_to course_team_path(course_id: params[:course_id], id: params[:team_id]), notice: 'Team member was successfully updated.' }
         format.json { render :show, status: :ok, location: @team_member }
       else
         format.html { render :edit }
@@ -65,7 +66,7 @@ class TeamMembersController < ApplicationController
   def destroy
     @team_member.destroy
     respond_to do |format|
-      format.html { redirect_to team_members_url, notice: 'Team member was successfully destroyed.' }
+      format.html { redirect_to course_team_path(course_id: params[:course_id], id: params[:team_id]), notice: 'Team member was successfully removed.' }
       format.json { head :no_content }
     end
   end

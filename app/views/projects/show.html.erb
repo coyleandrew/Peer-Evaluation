@@ -1,19 +1,38 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
+<h2><%= @project.name %> <small><%= link_to 'Edit', edit_course_project_path(course_id: @project.course_id, id: @project.id) %></small></h2>
 
 <p>
   <strong>Due:</strong>
   <%= @project.due %>
 </p>
 
-<p>
-  <strong>Course:</strong>
-  <%= @project.course_id %>
-</p>
+<%= form_with(model: ProjectTeam.new, local: true, url: course_project_project_teams_path(course_id: @project.course_id, project_id: @project.id) ) do |form| %>
+  <div class="field">
+    <%= form.label :team_id %>
+    <%= form.select :team_id, @teams.collect{ |t| [ t.name, t.id ] }, include_blank: true %>
+    <%= form.submit "Assign Team" %>
+  </div>
+<% end %>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<table>
+  <thead>
+    <tr>
+      <th>Score</th>
+      <th>Team</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @project.project_teams.each do |project_team| %>
+      <tr>
+        <td><%= project_team.score %></td>
+        <td><%= project_team.team.name %></td>
+        <td><%= link_to 'Remove', course_project_project_team_path(course_id: @project.course_id, project_id: @project.id, id: project_team.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back', course_path(id: @project.course_id) %>

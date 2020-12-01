@@ -1,5 +1,5 @@
 <h1>Editing Team</h1>
 
-<%= render 'form', team: @team %>
+<%= render 'form', {team: @team, path: course_team_path(course_id: @team.course_id, id: @team.id)} %>
 
 <%= link_to 'Back', course_path(id: @team.course_id) %>
