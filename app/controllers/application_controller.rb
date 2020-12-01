@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     def current_course
         if params[:course_id]
             @current_course ||= Course.find(params[:course_id])
-        elsif controller_name == "courses"
+        elsif controller_name == "courses" && params[:id].present?
             @current_course ||= Course.find(params[:id])
         else
             @current_course = nil
