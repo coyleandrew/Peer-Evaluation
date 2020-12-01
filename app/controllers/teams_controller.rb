@@ -15,6 +15,9 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
+    @students = CourseRoster.joins(:user)
+      .where(course_id: @team.course_id)
+      .reject { |cr| @team.team_members.any? { |tm| tm.user.email == cr.user.email } }
   end
 
   # GET /teams/new
@@ -47,7 +50,7 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to @team, notice: 'Team was successfully updated.' }
+        format.html { redirect_to course_team_path(course_id: @team.course_id, id: @team.id), notice: 'Team was successfully updated.' }
         format.json { render :show, status: :ok, location: @team }
       else
         format.html { render :edit }

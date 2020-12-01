@@ -16,7 +16,7 @@ users = [
 
 # Create faculty users
 fUsers = [
-    User.create(email: 'coyle.128@osu.edu', admin: false)]
+    User.create(email: 'soundarajan.3@osu.edu', admin: false)]
 
 # Create a sample courses
 course1 = Course.create(name: 'Course 1')

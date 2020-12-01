@@ -11,5 +11,67 @@
   <li><%= link_to 'Roster', course_course_rosters_path(course_id: params[:id]) %></li>
 </ul>
 
+<h2>Teams</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%  @course.teams.each do |team| %>
+      <tr>
+        <td><%= team.name %></td>
+        <td>
+          <%= link_to 'Edit', course_team_path(course_id: team.course_id, id: team.id) %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <ul>
+            <% team.team_members.each do |member| %>
+              <li><%= member.course_roster.user.email %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<h2>Projects</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Due</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @course.projects.each do |project| %>
+      <tr>
+        <td><%= project.name %></td>
+        <td><%= project.due %></td>
+        <td><%= link_to 'Edit', course_project_path(course_id: @course.id, id: project.id) %></td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <ul>
+            <% project.project_teams.each do |pt| %>
+              <li><%= pt.team.name %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to 'Edit', edit_course_path(@course) %> |
 <%= link_to 'Back', courses_path %>
