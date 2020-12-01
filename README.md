@@ -39,3 +39,23 @@ Init the database
 
 Start the containers
 > docker-compose up
+
+nested route structure:
+
+/home
+/course/id
+    /evaluations
+    /projects
+        /project_id/project_teams
+            /project_team_id/evaluations
+            /project_team_id/scores
+        /project_id/evaluations
+    /teams
+        /team_id/team_members
+        /team_id/evaluations
+    /course_roster
+/users
+/evaluations
+
+Link to presentation slides:
+https://docs.google.com/presentation/d/13g3EcdaAR77BKKxpqOB9rgQVU1VfA5bec_hnFej2kDA/edit#slide=id.gaeb091e4e6_4_0
