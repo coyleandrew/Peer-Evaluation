@@ -1,0 +1,23 @@
+<p id="alert"><%= alert %></p>
+<h1>Sign Up</h1>
+<%= form_tag register_path do |form| %>
+  <div class=”field”>
+    <%= label_tag :first_name %>
+    <%= text_field_tag :first_name %>
+  </div>
+  <div class=”field”>
+    <%= label_tag :last_name %>
+    <%= text_field_tag :last_name %>
+  </div>
+  <div class=”field”>
+    <%= label_tag :email %>
+    <%= text_field_tag :email %>
+  </div>
+  <div class=”field”>
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
+  </div>
+  <div class=”actions”>
+    <%= submit_tag "Sign Up!" %>
+  </div>
+<% end %>

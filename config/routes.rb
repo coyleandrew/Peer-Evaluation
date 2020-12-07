@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root to:   "home#index"
+  get 'registration' => 'registration#sign_up'
+  post 'register' => 'registration#register'
   resources :team_member_project_scores
   resources :evaluations, only: [:show]
   get 'evaluations/new/:projectId/:teamMemberId' => 'evaluations#new'
