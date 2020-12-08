@@ -4,13 +4,19 @@ end
 
 def register
     email = params[:email]
-    if User.find_by(email: email)
-        flash.now[:alert] = 'User already exists'
+    password = params[:password]
+    if User.find_by(email: email) || password == ""
+        if password == ""
+            flash.now[:alert] = 'Password is required'
+        else
+            flash.now[:alert] = 'User already exists'
+        end
         render "sign_up"
     else
         user = User.new
         user.email = email
         user.admin = false
+        user.password = password
         respond_to do |format|
             if user.save
             session[:user_id] = user.id
