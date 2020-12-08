@@ -59,3 +59,6 @@ nested route structure:
 
 Link to presentation slides:
 https://docs.google.com/presentation/d/13g3EcdaAR77BKKxpqOB9rgQVU1VfA5bec_hnFej2kDA/edit#slide=id.gaeb091e4e6_4_0
+
+Default passwords are set as 'password'
+If you have trouble logging in, try the default password
