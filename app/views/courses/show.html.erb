@@ -1,43 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Averages</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Course Average:</td>
-      <td>
-      <% sum = 0 %>
-      <% count = 0 %>
-      <% roster = CourseRoster.where(course_id: @course.id) %>
-      <% roster.each do |roster_entry| %>
-        <% scores = TeamMemberProjectScore.where(team_member_id: roster_entry.user_id) %>
-        <% scores.each do |score| %>
-          <% sum = sum + score.score %>
-          <% count += 1 %>
-        <% end %>
-      <% end %>
-      <% average = sum.to_f / count.to_f %>
-      <%= average %>
-      </td>
-    </tr>
-    <tr>
-      <td>Evaluation Average:</td>
-      <td>
+<div class="w3-container" style="margin-top:75px">
+  <div class="w3-half w3-margin-bottom">
+    <h2>Scores</h2>
+      <p>Average Project Score: 
         <% sum = 0 %>
-        <% evaluations = Evaluation.joins(:project).where(projects: { course_id: @course.id }) %>
-        <% evaluations.each do |eval| %>
-          <% sum = sum + eval.score %>
+        <% count = 0 %>
+        <% roster = CourseRoster.where(course_id: @course.id) %>
+        <% roster.each do |roster_entry| %>
+          <% scores = TeamMemberProjectScore.where(team_member_id: roster_entry.user_id) %>
+          <% scores.each do |score| %>
+            <% sum = sum + score.score %>
+            <% count += 1 %>
+          <% end %>
         <% end %>
-        <% average = sum.to_f / evaluations.length.to_f %>
-        <%= average.round(2) %>
-      </td>
-    </tr>
-  </tbody>
-</table>
+        <% average = sum.to_f / count.to_f %>
+        <%= average %>
+      </p>
+      <%= pie_chart TeamMemberProjectScore.joins(project_team: :project).
+        where(projects: {course_id: @course.id}).group(:score).count, donut: true, legend: "bottom" %>
+  </div>
+  <div class="w3-half w3-margin-bottom">
+    <h2>Evaluations</h2>
+    <p> Average Evaluation Score
+      <% sum = 0 %>
+      <% evaluations = Evaluation.joins(:project).where(projects: { course_id: @course.id }) %>
+      <% evaluations.each do |eval| %>
+        <% sum = sum + eval.score %>
+      <% end %>
+      <% average = sum.to_f / evaluations.length.to_f %>
+      <%= average.round(2) %>
+    </p>
+    <%= pie_chart evaluations.group(:score).count, donut: true, legend: "bottom" %>
+  </div>
+</div>
 
 <div class="w3-row-padding">
   <div class="w3-half w3-margin-bottom">

@@ -1,12 +1,27 @@
-<% Course.all.each do |course| %>
-  <%= link_to course.name, course_path(id: course.id), class: "w3-bar-item w3-button w3-hover-white" %>
-  <% if current_course && course.id == current_course.id %>
-    <ul>
-      <li><%= link_to 'Evaluations', course_evaluations_path(course_id: current_course.id), class: "w3-bar-item w3-button w3-hover-white" %></li>
-      <li><%= link_to 'Projects', course_projects_path(course_id: current_course.id), class: "w3-bar-item w3-button w3-hover-white" %></li>
-      <li><%= link_to 'Teams', course_teams_path(course_id: current_course.id), class: "w3-bar-item w3-button w3-hover-white" %></li>
-      <li><%= link_to 'Roster', course_course_rosters_path(course_id: current_course.id), class: "w3-bar-item w3-button w3-hover-white" %></li>
-    </ul>
+<% if current_user && current_user.admin %>
+
+  <% Course.all.each do |course| %>
+    <%= link_to course.name, course_path(id: course.id), class: "w3-bar-item w3-button w3-hover-white" %>
+    <% if current_course && course.id == current_course.id %>
+      <ul>
+        <li><%= link_to 'Evaluations', course_evaluations_path(course_id: current_course.id), class: "w3-bar-item w3-button w3-hover-white" %></li>
+        <li><%= link_to 'Projects', course_projects_path(course_id: current_course.id), class: "w3-bar-item w3-button w3-hover-white" %></li>
+        <li><%= link_to 'Teams', course_teams_path(course_id: current_course.id), class: "w3-bar-item w3-button w3-hover-white" %></li>
+        <li><%= link_to 'Roster', course_course_rosters_path(course_id: current_course.id), class: "w3-bar-item w3-button w3-hover-white" %></li>
+      </ul>
+    <% end %>
+  <% end %>
+
+<% elsif current_user  %>
+  <% current_user.faculties.each do |faculty| %>
+    <%= link_to faculty.course.name, course_path(id: faculty.course.id), class: "w3-bar-item w3-button w3-hover-white" %>
+    <% if current_course && faculty.course.id == current_course.id %>
+      <ul>
+        <li><%= link_to 'Evaluations', course_evaluations_path(course_id: current_course.id), class: "w3-bar-item w3-button w3-hover-white" %></li>
+        <li><%= link_to 'Projects', course_projects_path(course_id: current_course.id), class: "w3-bar-item w3-button w3-hover-white" %></li>
+        <li><%= link_to 'Teams', course_teams_path(course_id: current_course.id), class: "w3-bar-item w3-button w3-hover-white" %></li>
+        <li><%= link_to 'Roster', course_course_rosters_path(course_id: current_course.id), class: "w3-bar-item w3-button w3-hover-white" %></li>
+      </ul>
+    <% end %>
   <% end %>
 <% end %>
-
