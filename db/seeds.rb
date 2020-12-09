@@ -8,15 +8,15 @@
 
 # Create team users
 users = [
-    User.create(email: 'coyle.128@osu.edu', admin: true),
-    User.create(email: 'dettmer.16@osu.edu', admin: true),
-    User.create(email: 'li.9096@osu.edu', admin: true),
-    User.create(email: 'slaven.18@osu.edu', admin: true),
-    User.create(email: 'xue.409@osu.edu', admin: true)]
+    User.create(email: 'coyle.128@osu.edu', admin: true, password: 'password'),
+    User.create(email: 'dettmer.16@osu.edu', admin: true, password: 'password'),
+    User.create(email: 'li.9096@osu.edu', admin: true, password: 'password'),
+    User.create(email: 'slaven.18@osu.edu', admin: true, password: 'password'),
+    User.create(email: 'xue.409@osu.edu', admin: true, password: 'password')]
 
 # Create faculty users
 fUsers = [
-    User.create(email: 'soundarajan.3@osu.edu', admin: false)]
+    User.create(email: 'soundarajan.3@osu.edu', admin: false, password: 'password')]
 
 # Create a sample courses
 course1 = Course.create(name: 'Course 1')
