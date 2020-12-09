@@ -29,4 +29,4 @@ EXPOSE 3000
 CMD ["rails", "server", "-b", "0.0.0.0"]
 
 # Uncomment for heroku build
-# RUN RAILS_ENV=production bundle exec rake assets:precompile
+RUN RAILS_ENV=production bundle exec rake assets:precompile
